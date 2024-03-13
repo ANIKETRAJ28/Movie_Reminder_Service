@@ -24,7 +24,11 @@ class NotificationRepository {
 
     async getAll() {
         try {
-            const response = await NotificationTicket.findAll();
+            const response = await NotificationTicket.findAll({
+                where: {
+                    status: "pending"
+                }
+            });
             return response;
         } catch (error) {
             console.log("Something went wrong in repository layer");
@@ -35,6 +39,18 @@ class NotificationRepository {
     async destroy(id) {
         try {
             await NotificationTicket.destroy(id);
+            return true;
+        } catch (error) {
+            console.log("Something went wrong in repository layer");
+            throw error;
+        }
+    }
+
+    async update(id, data) {
+        try {
+            const response = await this.get(id);
+            response.status = data.status;
+            await response.save();
             return true;
         } catch (error) {
             console.log("Something went wrong in repository layer");

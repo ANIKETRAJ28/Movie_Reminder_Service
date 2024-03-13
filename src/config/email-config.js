@@ -9,4 +9,4 @@ const sendEmail = nodemailer.createTransport({
     },
 });
 
-module.exports = { sendEmail };
+module.exports = sendEmail;

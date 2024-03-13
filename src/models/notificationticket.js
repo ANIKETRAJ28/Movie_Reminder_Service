@@ -24,7 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      require: true
+      require: true,
+      validate: {
+        isEmail: true
+      }
     },
     status: {
       type: DataTypes.ENUM,
